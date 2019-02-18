@@ -1,0 +1,11 @@
+server: 
+ contextPath: /springboot-activiti-demo
+ port: 8080
+spring:
+ mvc:
+  view:
+   prefix: /WEB-INF/page
+   subfix: .html
+logging: 
+ config: classpath:logback.xml
+ 
