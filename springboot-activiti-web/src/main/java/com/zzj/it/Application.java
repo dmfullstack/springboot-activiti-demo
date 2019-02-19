@@ -6,8 +6,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(scanBasePackages = { "com.beer.it" })
-@ComponentScan("com.beer.it")
+@SpringBootApplication(scanBasePackages = { "com.zj.it" })
+@ComponentScan("com.zzj.it")
 public class Application extends SpringBootServletInitializer {
 
 	@Override

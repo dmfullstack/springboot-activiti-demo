@@ -6,6 +6,11 @@ spring:
   view:
    prefix: /WEB-INF/page
    subfix: .html
+ datasource: 
+  url: jdbc:mysql://localhost:3306/activity_demo?characterEncoding=UTF-8
+  username: root
+  password: admin
+  driver-class-name: com.mysql.jdbc.Driver
 logging: 
  config: classpath:logback.xml
  
