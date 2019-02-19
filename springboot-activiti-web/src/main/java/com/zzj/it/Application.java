@@ -6,7 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(scanBasePackages = { "com.zj.it" })
+@SpringBootApplication(scanBasePackages = { "com.zzj.it" })
 @ComponentScan("com.zzj.it")
 public class Application extends SpringBootServletInitializer {
 
