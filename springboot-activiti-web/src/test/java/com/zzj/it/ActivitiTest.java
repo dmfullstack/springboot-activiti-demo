@@ -33,13 +33,13 @@ public class ActivitiTest {
 		logger.info("启动流程节点");
 		Task task= taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
 		logger.info("当前流程节点："+task.getName());
-		taskService.complete(processInstance.getId());
+		taskService.complete(task.getId());
 		logger.info("学生完成请假");
 		task=taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
-		taskService.complete(processInstance.getId());
-		logger.info("流程结束后"+task);
+		taskService.complete(task.getId());
+		logger.info("流程结束"+task);
 		task=taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
-		logger.info("流程结束");
+		logger.info("流程结束"+task);
 		engine.close();
 	}
 
