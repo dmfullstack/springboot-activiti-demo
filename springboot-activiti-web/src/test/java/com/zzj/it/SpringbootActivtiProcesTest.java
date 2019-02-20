@@ -36,11 +36,11 @@ public class SpringbootActivtiProcesTest {
 		
 		
 		logger.info("部署");
-		Deployment dp = rs.createDeployment().addClasspathResource("processes/demo02.bpmn")
+		Deployment dep = rs.createDeployment().addClasspathResource("processes/demo02.bpmn")
 				.deploy();
 		
-		logger.info("部署id"+dp.getId());
-		ProcessDefinition pd = rs.createProcessDefinitionQuery().deploymentId(dp.getId()).singleResult();
+		logger.info("部署id"+dep.getId());
+		ProcessDefinition pd = rs.createProcessDefinitionQuery().deploymentId(dep.getId()).singleResult();
 		logger.info("启动流程实例"+pd.getId());
 		ProcessInstance pi= runService.startProcessInstanceById(pd.getId());
 		
