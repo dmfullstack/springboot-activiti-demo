@@ -1,4 +1,4 @@
-package com.zzj.it;
+package com.zzj.it.api;
 
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
@@ -14,16 +14,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.zzj.it.Application;
+
 /**
- * 定时工作测试
- * @author zhouzj
+ * 测试执行流
  * 
+ * @author admin
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
-public class TimerTaskTest {
-	private static final Logger logger = LoggerFactory.getLogger(TimerTaskTest.class);
+public class SpringbootActivtiProcesTest {
+	private static final Logger logger = LoggerFactory.getLogger(SpringbootActivtiProcesTest.class);
 
 	@Test
 	public void test() {
@@ -32,15 +35,18 @@ public class TimerTaskTest {
 		RepositoryService rs = engine.getRepositoryService();
 		RuntimeService runService = engine.getRuntimeService();
 		TaskService taskService = engine.getTaskService();
-
+		
+		
 		logger.info("部署");
-		Deployment dep = rs.createDeployment().addClasspathResource("processes/timer_task.bpmn").deploy();
-
-		logger.info("部署id" + dep.getId());
+		Deployment dep = rs.createDeployment().addClasspathResource("processes/demo02.bpmn")
+				.deploy();
+		
+		logger.info("部署id"+dep.getId());
 		ProcessDefinition pd = rs.createProcessDefinitionQuery().deploymentId(dep.getId()).singleResult();
-		logger.info("启动流程实例" + pd.getId());
-		ProcessInstance pi = runService.startProcessInstanceById(pd.getId());
-		logger.error("执行流id={}", pi.getId());
+		logger.info("启动流程实例"+pd.getId());
+		ProcessInstance pi= runService.startProcessInstanceById(pd.getId());
+		
+		logger.info(pi.getId());
 	}
 
 }

@@ -1,4 +1,6 @@
-package com.zzj.it;
+package com.zzj.it.api;
+
+import java.util.List;
 
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
@@ -9,6 +11,7 @@ import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -16,10 +19,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.zzj.it.Application;
+
+/**
+ * 参数作用域测试
+ * 
+ * @author zzj <br>
+ * @Email 799596822@qq.com
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
-public class SignalCatchEventTaskTest {
-
+public class ScopeTest {
 	private static final Logger logger = LoggerFactory.getLogger(ScopeTest.class);
 
 	@Test
@@ -31,25 +42,39 @@ public class SignalCatchEventTaskTest {
 		TaskService taskService = engine.getTaskService();
 
 		logger.info("部署");
-		Deployment dep = rs.createDeployment().addClasspathResource("processes/signalCatchEvent.bpmn").deploy();
+		Deployment dep = rs.createDeployment().addClasspathResource("processes/scope.bpmn").deploy();
 
 		logger.info("部署id" + dep.getId());
 		ProcessDefinition pd = rs.createProcessDefinitionQuery().deploymentId(dep.getId()).singleResult();
 		logger.info("启动流程实例" + pd.getId());
 		ProcessInstance pi = runService.startProcessInstanceById(pd.getId());
 		logger.info(pi.getId());
+		List<Task> tasks = taskService.createTaskQuery().processInstanceId(pi.getId()).list();
 
-		// 获取执行流
-		Execution exe = runService.createExecutionQuery().processInstanceId(pi.getId()).onlyChildExecutions()
-				.singleResult();
+		for (Task task : tasks) {
+			//在设置值时需要先获取到执行流
+			Execution e = runService.createExecutionQuery().executionId(task.getExecutionId()).singleResult();
+			logger.info("taskName:"+task.getName());
+			if ("taskA".equals(task.getName())) {
+				//设置参数为本地参数
+				runService.setVariableLocal(e.getId(), "taskA", "varA");
+			} else {
+				//设置参数为全局参数
+				runService.setVariable(e.getId(), "taskB", "varB");
+			}
+		}
+		//结束流程
+		for (Task task : tasks) {
+			taskService.complete(task.getId());
+		}
+		
+		Task taskC =taskService.createTaskQuery().processInstanceId(pi.getId()).singleResult();
+		//获取到参数
+		logger.info("taskA var ="+runService.getVariable(pi.getId(), "taskA"));
+		
+		logger.info("taskB var="+runService.getVariable(pi.getId(), "taskB"));
 
-		logger.error("{}当前执行节点{}", pi.getId(), exe.getActivityId());
-		//在发送触发信号的时候引用的配置中貌似使用的是name属性中的值，以后再测试
-		runService.signalEventReceived("singalTest");
-		// 获取执行流
-		exe = runService.createExecutionQuery().processInstanceId(pi.getId()).onlyChildExecutions().singleResult();
-
-		logger.error("{}当前执行节点{}", pi.getId(), exe.getActivityId());
+		//最终结果，本地参数无法获取，全局参数可获取
 	}
 
 }

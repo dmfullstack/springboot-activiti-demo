@@ -1,4 +1,6 @@
-package com.zzj.it;
+package com.zzj.it.api;
+
+import static org.junit.Assert.*;
 
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
@@ -16,16 +18,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.zzj.it.Application;
+
 /**
- * 流程操作与数据查询
- * 
- * @author admin
+ * 消息中间事件测试
+ * @author zhouzj
  *
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
-public class RecevieTaskTest {
-	private static final Logger logger = LoggerFactory.getLogger(ScopeTest.class);
+public class MessageEventTaskTest {
+	private static final Logger logger = LoggerFactory.getLogger(MessageEventTaskTest.class);
 
 	@Test
 	public void test() {
@@ -36,19 +40,24 @@ public class RecevieTaskTest {
 		TaskService taskService = engine.getTaskService();
 
 		logger.info("部署");
-		Deployment dep = rs.createDeployment().addClasspathResource("processes/recevie.bpmn").deploy();
+		Deployment dep = rs.createDeployment().addClasspathResource("processes/messageEventTask.bpmn").deploy();
+
+		logger.info("部署id" + dep.getId());
 		ProcessDefinition pd = rs.createProcessDefinitionQuery().deploymentId(dep.getId()).singleResult();
-		logger.info("启动流程");
+		logger.info("启动流程实例" + pd.getId());
 		ProcessInstance pi = runService.startProcessInstanceById(pd.getId());
 		logger.info(pi.getId());
+
+		// 获取执行流
 		Execution exe = runService.createExecutionQuery().processInstanceId(pi.getId()).onlyChildExecutions()
 				.singleResult();
-		logger.error("{},当前节点{}", pi.getId(), exe.getActivityId());
 
-		// 让流程往下走
-		runService.trigger(exe.getId());
-
+		logger.error("{}当前执行节点{}", pi.getId(), exe.getActivityId());
+		//发送message信号
+		runService.messageEventReceived("testMessage", exe.getId());
 		exe = runService.createExecutionQuery().processInstanceId(pi.getId()).onlyChildExecutions().singleResult();
-		logger.error("{},当前节点{}", pi.getId(), exe.getActivityId());
+		
+		logger.error("{}当前执行节点{}", pi.getId(), exe.getActivityId());
 	}
+
 }
