@@ -12,6 +12,11 @@
   		<artifactId>springboot-activiti-common</artifactId>
   		<version>${project.version}</version>
   	</dependency>
+  		<dependency>
+  		<groupId>com.zzj.it</groupId>
+  		<artifactId>springboot-activiti-service</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
   </dependencies>
   
 </project>

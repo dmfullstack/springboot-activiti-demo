@@ -1,0 +1,12 @@
+工作的产生与管理
+第一节 产生的数据存储的表
+1.异步任务
+	会将数据存储至act_ru_job（一般工作表）表中
+2.定时任务
+	会将数据存储至act_ru_time_job表中
+3.暂停的工作
+	会将数据存储至act_ru_suspended_job表中
+4.无法执行的工作
+	会将数据存储至act_ru_deadletter_job表中
+第二节 开启异步任务
+	需要在配置activiti服务的配置的时候设置asyncExecutorActivate为true，默认为false

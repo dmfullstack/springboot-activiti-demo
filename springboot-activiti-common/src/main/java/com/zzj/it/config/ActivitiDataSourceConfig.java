@@ -31,6 +31,7 @@ public class ActivitiDataSourceConfig {
 		 * 
 		 */
 		configuration.setHistory("activity");
+		configuration.setAsyncExecutorActivate(true);
 		return configuration;
 	}
 
