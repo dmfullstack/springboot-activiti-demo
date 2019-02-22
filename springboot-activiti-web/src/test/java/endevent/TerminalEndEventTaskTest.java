@@ -46,18 +46,20 @@ public class TerminalEndEventTaskTest {
 		ProcessInstance pi = runService.startProcessInstanceById(pd.getId());
 		logger.info(pi.getId());
 
-		 List<Execution> executions=runService.createExecutionQuery().processInstanceId(pi.getId()).list();
-		 
-		 logger.error("终止前执行流数量：{}",executions.size());;
-		 
-		 List<Task> tasks=taskService.createTaskQuery().processInstanceId(pi.getId()).list();
-		 
-		 for (Task task : tasks) {
-			if("usertask1".equals(task.getName())) {
+		List<Execution> executions = runService.createExecutionQuery().processInstanceId(pi.getId()).list();
+
+		logger.error("终止前执行流数量：{}", executions.size());
+		;
+
+		List<Task> tasks = taskService.createTaskQuery().processInstanceId(pi.getId()).list();
+
+		for (Task task : tasks) {
+			if ("usertask1".equals(task.getName())) {
 				taskService.complete(task.getId());
 			}
 		}
-		 logger.error("终止后执行流数量：{}",runService.createExecutionQuery().processDefinitionId(pi.getId()).count());
+		logger.error("终止后执行流数量：{}", runService.createExecutionQuery().processDefinitionId(pi.getId()).count());
+		logger.error("终止后查看任务是否还存在：{},{}",rs.createProcessDefinitionQuery().processDefinitionId(pi.getId()).singleResult(),"可以看到值已经查不到");
 	}
 
 }
