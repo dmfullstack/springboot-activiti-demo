@@ -22,8 +22,8 @@ import com.zzj.it.Application;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
-public class ErrorEndEventTaskService {
-	private static final Logger logger = LoggerFactory.getLogger(ErrorEndEventTaskService.class);
+public class ErrorEndEventTaskTest {
+	private static final Logger logger = LoggerFactory.getLogger(ErrorEndEventTaskTest.class);
 	@Test
 	public void test() {
 		ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
