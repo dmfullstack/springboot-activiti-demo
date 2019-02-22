@@ -25,7 +25,7 @@ public class ActivitiDataSourceConfig {
 		 * 设置数据库策略 false 不做操作 true 如果没有表则去更新或者新建 create-drop 在启动的时候创建 关闭时删除 drop-create
 		 * 启动先删除再创建
 		 */
-		configuration.setDatabaseSchemaUpdate("drop-create");
+		configuration.setDatabaseSchemaUpdate("true");
 		/**
 		 * 历史配置 none 不保存任何数据 activity
 		 * 
