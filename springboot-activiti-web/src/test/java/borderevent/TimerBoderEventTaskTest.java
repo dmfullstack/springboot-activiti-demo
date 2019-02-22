@@ -46,7 +46,7 @@ public class TimerBoderEventTaskTest {
 		Task task = taskService.createTaskQuery().processInstanceId(pi.getId()).singleResult();
 		logger.error("当前流程节点:{}", task.getName());
 
-		Thread.sleep(15 * 1000);
+		Thread.sleep(70 * 1000);
 
 		task = taskService.createTaskQuery().processInstanceId(pi.getId()).singleResult();
 		logger.error("当前流程节点:{}", task.getName());

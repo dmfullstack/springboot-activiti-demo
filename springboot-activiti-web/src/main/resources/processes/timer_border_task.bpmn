@@ -7,7 +7,7 @@
     <endEvent id="endevent1" name="End"></endEvent>
     <boundaryEvent id="boundarytimer1" name="Timer" attachedToRef="usertask3" cancelActivity="true">
       <timerEventDefinition>
-        <timeDuration>PT10S</timeDuration>
+        <timeDuration>PT1M</timeDuration>
       </timerEventDefinition>
     </boundaryEvent>
     <sequenceFlow id="flow1" sourceRef="boundarytimer1" targetRef="usertask2"></sequenceFlow>
