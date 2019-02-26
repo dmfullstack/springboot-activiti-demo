@@ -23,6 +23,7 @@ import com.zzj.it.Application;
 
 /**
  * 条件顺序流
+ * 如果条件
  * 
  * @author zhouzj
  *
