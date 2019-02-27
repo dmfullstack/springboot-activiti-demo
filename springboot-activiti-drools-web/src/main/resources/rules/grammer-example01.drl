@@ -1,0 +1,27 @@
+package com.zzj.it;
+import java.util.*;
+import java.text.*;
+import com.zzj.it.moudels.example.entity.User
+
+function String formatDate(Date date){
+	SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	return sdf.format(date);
+}
+
+function void print(User user){
+	System.out.println("当前用户："+user.getUserName()+"消费金额："+user.getAmount()+"元 消费时间："+formatDate(new Date()));
+}
+
+function boolean canDiscount(int price,int amount,int discountBoundary){
+	if(price*amount>discountBoundary){
+		return true;
+	}
+	return false;
+}
+
+rule "user amount count"
+	when 
+		$s: User(canDiscount(10,amount,100));
+	then 
+		print($s);
+end
