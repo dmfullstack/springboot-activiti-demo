@@ -1,0 +1,21 @@
+package com.zzj.it;
+import java.util.*;
+import java.text.*;
+import com.zzj.it.moudels.example.entity.User;
+
+rule "acivation group A"
+	activation-group "acivation group"
+	when 
+		User(amount>100);
+	then 
+		System.out.println("消费金额大于100，组A");
+end
+
+rule "acivation group B"
+	activation-group "acivation group"
+	salience 1
+	when 
+		User(amount>120);
+	then 
+		System.out.println("消费金额大于120，组B");
+end
