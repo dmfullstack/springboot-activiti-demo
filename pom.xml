@@ -16,6 +16,7 @@
 		<module>springboot-activiti-service</module>
 		<module>springboot-activiti-web</module>
 		<module>springboot-activiti-drools-web</module>
+		<module>springboot-activiti-drolos-service</module>
 	</modules>
 
 

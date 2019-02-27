@@ -9,39 +9,7 @@
 	</parent>
 	<artifactId>springboot-activiti-drools-web</artifactId>
 	<dependencies>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-core</artifactId>
-			<version>7.0.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-compiler</artifactId>
-			<version>7.0.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-decisiontables</artifactId>
-			<version>7.0.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-templates</artifactId>
-			<version>7.0.0.Final</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kie-api</artifactId>
-			<version>7.0.0.Final</version>
-		</dependency>
-
-		<!-- lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
+		
 		<dependency>
 			<groupId>com.zzj.it</groupId>
 			<artifactId>springboot-activiti-common</artifactId>
@@ -49,7 +17,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.zzj.it</groupId>
-			<artifactId>springboot-activiti-service</artifactId>
+			<artifactId>springboot-activiti-drolos-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
