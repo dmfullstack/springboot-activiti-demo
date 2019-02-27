@@ -1,0 +1,17 @@
+package com.zzj.it
+import com.zzj.it.moudels.example.entity.User;
+
+rule "gold"
+	when
+		$user: User(identity=="gold")
+	then
+		$user.setResult(0.7);
+		update($user);
+end
+rule "silver"
+	when
+		$user: User(identity=="silver")
+	then
+		$user.setResult(0.8);
+		update($user);
+end
