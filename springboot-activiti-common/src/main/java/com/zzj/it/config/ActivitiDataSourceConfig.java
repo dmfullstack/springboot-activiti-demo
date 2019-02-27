@@ -1,7 +1,12 @@
 package com.zzj.it.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration;
+import org.activiti.engine.impl.persistence.deploy.Deployer;
+import org.activiti.engine.impl.rules.RulesDeployer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +21,14 @@ public class ActivitiDataSourceConfig {
 	@Autowired
 	private DruidDataSource dataSource;
 
+	/**
+	 * 配置規則文件
+	 * @return
+	 */
+	@Bean
+	public Deployer rules() {
+		return new RulesDeployer(); 
+	}
 	@Bean("processEngineConfiguration")
 	public ProcessEngineConfiguration engineConfiguration() {
 		logger.error("开始配置activiti 数据服务");
@@ -32,6 +45,9 @@ public class ActivitiDataSourceConfig {
 		 */
 		configuration.setHistory("activity");
 		configuration.setAsyncExecutorActivate(true);
+		List<Deployer> deployers=new ArrayList<Deployer>();
+		deployers.add(this.rules());
+		configuration.setCustomPostDeployers(deployers);
 		return configuration;
 	}
 
