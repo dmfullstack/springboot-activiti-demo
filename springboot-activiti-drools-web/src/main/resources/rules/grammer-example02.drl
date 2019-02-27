@@ -1,0 +1,12 @@
+package com.zzj.it;
+import java.util.*;
+import java.text.*;
+import com.zzj.it.moudels.example.entity.User
+ 
+rule "discount"
+	when 
+		$s: User(amount>100);
+	then 
+		$s.setAfterDiscount(100-10);
+		update($s);
+end

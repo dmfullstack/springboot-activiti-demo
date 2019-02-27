@@ -12,6 +12,8 @@ public class User implements Serializable {
 	private String userName;
 
 	private int amount;
+	//优惠后金额
+	private int afterDiscount;
 
 	public String getUserName() {
 		return userName;
@@ -28,5 +30,15 @@ public class User implements Serializable {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+
+	public int getAfterDiscount() {
+		return afterDiscount;
+	}
+
+	public void setAfterDiscount(int afterDiscount) {
+		this.afterDiscount = afterDiscount;
+	}
+	
+	
 
 }
