@@ -1,0 +1,17 @@
+server: 
+ contextPath: /springboot-activiti-drools
+ port: 8081
+spring:
+ mvc:
+  view:
+   prefix: /WEB-INF/page
+   subfix: .html
+ datasource: 
+  url: jdbc:mysql://localhost:3306/activiti_demo?characterEncoding=UTF-8
+  username: root
+  password: admin
+  driver-class-name: com.mysql.jdbc.Driver
+  driver: com.mysql.jdbc.Driver
+logging: 
+ config: classpath:logback.xml
+ 
