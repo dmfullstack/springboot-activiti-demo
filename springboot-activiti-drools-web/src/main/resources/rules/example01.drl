@@ -1,0 +1,9 @@
+package com.zzj.it
+import com.zzj.it.moudels.example.entity.User
+
+rule "example 01"
+	when 
+		User(userName=="zhouzj") ;
+	then
+		System.out.println("你好，主人！");
+end

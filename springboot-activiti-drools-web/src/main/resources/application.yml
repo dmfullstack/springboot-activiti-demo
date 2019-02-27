@@ -7,7 +7,7 @@ spring:
    prefix: /WEB-INF/page
    subfix: .html
  datasource: 
-  url: jdbc:mysql://localhost:3306/activiti_demo?characterEncoding=UTF-8
+  url: jdbc:mysql://localhost:3306/activiti_demo?characterEncoding=UTF-8&useSSL=false
   username: root
   password: admin
   driver-class-name: com.mysql.jdbc.Driver
