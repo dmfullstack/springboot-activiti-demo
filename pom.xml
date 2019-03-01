@@ -22,6 +22,8 @@
 
 	<properties>
 		<springboot.version>1.5.10.RELEASE</springboot.version>
+		<activiti.version>6.0.0</activiti.version>
+		<mule.version>3.5.0</mule.version>
 	</properties>
 
 	<dependencies>
@@ -66,6 +68,7 @@
 			<artifactId>druid</artifactId>
 			<version>1.1.9</version>
 		</dependency>
+		
 
 	</dependencies>
 </project>
