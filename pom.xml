@@ -17,6 +17,8 @@
 		<module>springboot-activiti-web</module>
 		<module>springboot-activiti-drools-web</module>
 		<module>springboot-activiti-drolos-service</module>
+		<module>springboot-activiti-reject-service</module>
+		<module>springboot-activiti-reject-web</module>
 	</modules>
 
 
