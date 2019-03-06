@@ -7,26 +7,11 @@
 		<artifactId>springboot-activiti</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>springboot-activiti-auth</artifactId>
+	<artifactId>springboot-activiti-datasource</artifactId>
 	<dependencies>
-		<dependency>
-			<groupId>org.mybatis.generator</groupId>
-			<artifactId>mybatis-generator-core</artifactId>
-			<version>1.3.7</version>
-		</dependency>
 		<dependency>
 			<groupId>com.zzj.it</groupId>
 			<artifactId>springboot-activiti-common</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.zzj.it</groupId>
-			<artifactId>springboot-activiti-shiro</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.zzj.it</groupId>
-			<artifactId>springboot-activiti-datasource</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

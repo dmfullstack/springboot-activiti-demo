@@ -14,5 +14,10 @@
 			<artifactId>activiti-spring-boot-starter-basic</artifactId>
 			<version>6.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.zzj.it</groupId>
+			<artifactId>springboot-activiti-datasource</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>

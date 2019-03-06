@@ -23,6 +23,7 @@
 		<module>springboot-activiti-auth-web</module>
 		<module>springboot-activiti-activiti</module>
 		<module>springboot-activiti-shiro</module>
+		<module>springboot-activiti-datasource</module>
 	</modules>
 
 
