@@ -18,11 +18,39 @@ spring:
   testSql: select 'X'
 logging: 
  config: classpath:logback.xml
-shiro: 
- filterMap:
+shiroFilter: 
+ filterChainDefinitionMap:
   /sysmgr/login: anon
   /sysmgr/logout: anon
   /**: authc
+ success:
+ login: /sysmgr/login
+ unauth: /error
+ usernameParam: userName
+ passwordParam: password
+ rememberMeParam: rememberMe
+ hashAlgorithmName: MD5
+ hashIterations: 1
+ shiroSessionTimeOut: 1800
+ cookieName: shirosessionid
+ maxAgeTime: 1800
 mybatis:
  mapperLocations: classpath*:mapper/**/*.xml
  typeAliasesPackage: *.*
+redis:
+ host: 127.0.0.1
+ port: 6379
+ timeout: 15000
+ password: 12345
+ database: 0
+ shiro:
+  maxIdle: 10
+  maxTotal: 10
+  maxWaitMillis: 1000
+  minIdle: 5
+  testOnBorrow: true
+  testOnReturn: true
+  testWhileIdle: true
+  timeBetweenEvictionRunsMillis: 30000
+  numTestsPerEvictionRun: 10
+  minEvictableIdleTimeMillis: 60000
