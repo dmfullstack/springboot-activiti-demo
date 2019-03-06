@@ -17,7 +17,11 @@
 			<artifactId>springboot-activiti-common</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.zzj.it</groupId>
+			<artifactId>springboot-activiti-activiti</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!-- drools依赖 -->
 		<dependency>
 			<groupId>org.drools</groupId>

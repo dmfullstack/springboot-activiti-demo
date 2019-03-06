@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzj.it.moudels.role.dao.ActRoleMapper">
+  <resultMap id="BaseResultMap" type="com.zzj.it.moudels.role.entity.ActRole">
+    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="created_date" jdbcType="VARCHAR" property="createdDate" />
+    <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy" />
+    <result column="last_updated_date" jdbcType="VARCHAR" property="lastUpdatedDate" />
+    <result column="delete_flag" jdbcType="VARCHAR" property="deleteFlag" />
+    <result column="comments" jdbcType="VARCHAR" property="comments"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, role_name, role_code, create_by, created_date, last_update_by, last_updated_date, 
+    delete_flag,comments
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from act_role_t
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from act_role_t
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zzj.it.moudels.role.entity.ActRole">
+    insert into act_role_t (role_id, role_name, role_code, 
+      create_by, created_date, last_update_by, 
+      last_updated_date, delete_flag)
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=VARCHAR}, #{lastUpdateBy,jdbcType=VARCHAR}, 
+      #{lastUpdatedDate,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzj.it.moudels.role.entity.ActRole">
+    insert into act_role_t
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleCode != null">
+        role_code,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+        created_date,
+      <if test="lastUpdateBy != null">
+        last_update_by,
+      </if>
+        last_updated_date,
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="comments != null">
+        comments,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+        sysdate(),
+      <if test="lastUpdateBy != null">
+        #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+        sysdate(),
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        #{comments},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzj.it.moudels.role.entity.ActRole">
+    update act_role_t
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        role_code = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null">
+        last_updated_date = #{lastUpdatedDate,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        comments=#{comments},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzj.it.moudels.role.entity.ActRole">
+    update act_role_t
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      role_code = #{roleCode,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=VARCHAR},
+      last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+      last_updated_date = #{lastUpdatedDate,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <select id="getRoleByUser" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/> from act_role_t  r
+  	 join act_role_user ar on r.role_id=ar.role_id and ar.user_id=#{userId}
+  	 order by r.created_date desc
+  </select>
+  
+  <select id="getRolePageList" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/> from act_role_t  r
+  	<where>
+  		and r.delete_flag='N'
+  	  <if test="roleName != null">
+        role_name like concat('%',#{roleName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="roleCode != null">
+        role_code like concat('%', #{roleCode,jdbcType=VARCHAR},'%')
+      </if>
+  	</where>
+  	order by r.created_date desc
+  </select>
+</mapper>

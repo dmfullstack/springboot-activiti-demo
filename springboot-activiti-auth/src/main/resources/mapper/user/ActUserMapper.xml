@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzj.it.moudels.user.dao.ActUserMapper">
+  <resultMap id="BaseResultMap" type="com.zzj.it.moudels.user.entity.ActUser">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="created_date" jdbcType="VARCHAR" property="createdDate" />
+    <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy" />
+    <result column="last_updated_date" jdbcType="VARCHAR" property="lastUpdatedDate" />
+    <result column="delete_flag" jdbcType="VARCHAR" property="deleteFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, user_name, real_name, password, email, phone, address, create_by, date_format(created_date,'%Y-%m-%d %t') created_date, 
+    last_update_by, date_format(last_updated_date,'%Y-%m-%d %t') last_updated_date, delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from act_user_t
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from act_user_t
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zzj.it.moudels.user.entity.ActUser">
+    insert into act_user_t (user_id, user_name, real_name, 
+      password, email, phone, 
+      address, create_by, created_date, 
+      last_update_by, last_updated_date, delete_flag
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=VARCHAR}, 
+      #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdatedDate,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzj.it.moudels.user.entity.ActUser">
+    insert into act_user_t
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+        created_date,
+      <if test="lastUpdateBy != null">
+        last_update_by,
+      </if>
+        last_updated_date,
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+        sysdate(),
+      <if test="lastUpdateBy != null">
+        #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+        sysdate(),
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzj.it.moudels.user.entity.ActUser">
+    update act_user_t
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null">
+        last_updated_date = #{lastUpdatedDate,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzj.it.moudels.user.entity.ActUser">
+    update act_user_t
+    set user_name = #{userName,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=VARCHAR},
+      last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+      last_updated_date = #{lastUpdatedDate,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="findUserList" resultMap="BaseResultMap">
+  	select <include refid="Base_column_list"/> form act_user_t t 
+  	 <where>
+  	 	AND delete_flag='N'
+  	 	  <if test="userName != null">
+	        AND user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
+	      </if>
+	      <if test="realName != null">
+	        AND real_name like concat('%',#{realName,jdbcType=VARCHAR},'%')
+	      </if>
+	      <if test="email != null">
+	        AND email = #{email,jdbcType=VARCHAR}
+	      </if>
+	      <if test="phone != null">
+	        AND phone = #{phone,jdbcType=VARCHAR}
+	      </if>
+	      <if test="address != null">
+	        AND address = #{address,jdbcType=VARCHAR}
+	      </if>
+  	 </where>
+  </select>
+  <select id="getUserDetail" resultMap="BaseResultMap">
+  	select <include refid="Base_column_list"/> form act_user_t t 
+  	 <where>
+  	 	AND delete_flag='N'
+  	 	  <if test="userName != null">
+	        AND user_name = #{userName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="realName != null">
+	        AND real_name = #{realName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="email != null">
+	        AND email = #{email,jdbcType=VARCHAR}
+	      </if>
+	      <if test="phone != null">
+	        AND phone = #{phone,jdbcType=VARCHAR}
+	      </if>
+	      <if test="address != null">
+	        AND address = #{address,jdbcType=VARCHAR}
+	      </if>
+	      <if test="userId != null">
+	        AND user_id = #{userId,jdbcType=VARCHAR},
+	      </if>
+  	 </where>
+  </select>
+</mapper>

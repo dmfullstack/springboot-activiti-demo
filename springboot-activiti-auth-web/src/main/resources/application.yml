@@ -1,0 +1,28 @@
+server: 
+ contextPath: /auth
+ port: 8080
+spring:
+ mvc:
+  view:
+   prefix: /WEB-INF/page
+   subfix: .html
+ datasource: 
+  url: jdbc:mysql://localhost:3306/reject_act?characterEncoding=UTF-8
+  username: root
+  password: admin
+  driver-class-name: com.mysql.jdbc.Driver
+  driver: com.mysql.jdbc.Driver
+  maxActive: 30
+  initSize: 20
+  minIdle: 10
+  testSql: select 'X'
+logging: 
+ config: classpath:logback.xml
+shiro: 
+ filterMap:
+  /sysmgr/login: anon
+  /sysmgr/logout: anon
+  /**: authc
+mybatis:
+ mapperLocations: classpath*:mapper/**/*.xml
+ typeAliasesPackage: *.*
