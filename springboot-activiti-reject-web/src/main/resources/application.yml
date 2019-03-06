@@ -19,3 +19,5 @@ shiro:
   /sysmgr/login: anon
   /sysmgr/logout: anon
   /**: authc
+ user:
+ 	servers: http://locahost:8080/auth/

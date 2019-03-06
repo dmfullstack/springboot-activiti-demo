@@ -2,11 +2,12 @@ package com.zzj.it.common.cofig;
 
 import java.util.Properties;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,13 +23,13 @@ import com.zzj.it.exception.MyRunException;
 @Configuration
 public class MybatisConfigure {
 
-	@Value("mybatis.mapperLocations")
+	@Value("${mybatis.mapperLocations}")
 	private String mapperLocations;
 
-	@Value("mybatis.typeAliasesPackage")
+	@Value("${mybatis.typeAliasesPackage}")
 	private String aliasesPackage;
 	
-	@Autowired
+	@Resource(name="dataSource")
 	private DruidDataSource dataSource;
 	
 	@Bean("sqlSessionFactory")
@@ -43,6 +44,7 @@ public class MybatisConfigure {
 		properties.setProperty("supportMethodsArguments", "true");
 		properties.setProperty("returnPageInfo", "check");
 		properties.setProperty("params", "count=countSql");
+		properties.setProperty("dialect", "mysql");
 		helper.setProperties(properties);
 		bean.setPlugins(new Interceptor[] {helper});
 		ResourcePatternResolver patternResolver=new PathMatchingResourcePatternResolver();

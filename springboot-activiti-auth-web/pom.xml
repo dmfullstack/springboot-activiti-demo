@@ -6,4 +6,11 @@
     <version>1.0</version>
   </parent>
   <artifactId>springboot-activiti-auth-web</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.zzj.it</groupId>
+  		<artifactId>springboot-activiti-auth</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
+  </dependencies>
 </project>

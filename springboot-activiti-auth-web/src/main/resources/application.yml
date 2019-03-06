@@ -20,11 +20,12 @@ logging:
  config: classpath:logback.xml
 shiroFilter: 
  filterChainDefinitionMap:
-  /sysmgr/login: anon
-  /sysmgr/logout: anon
+  /auth/login: anon
+  /auth/logout: anon
+  /sysmgr/user/getUserInfo: anon
   /**: authc
- success:
- login: /sysmgr/login
+ success: /auth/success
+ login: /auth/login
  unauth: /error
  usernameParam: userName
  passwordParam: password
@@ -34,9 +35,12 @@ shiroFilter:
  shiroSessionTimeOut: 1800
  cookieName: shirosessionid
  maxAgeTime: 1800
+shiro:
+ session:
+  timeout: 1800000
 mybatis:
  mapperLocations: classpath*:mapper/**/*.xml
- typeAliasesPackage: *.*
+ typeAliasesPackage: com.zzj.it.*.moudels.*.entity
 redis:
  host: 127.0.0.1
  port: 6379
@@ -44,6 +48,7 @@ redis:
  password: 12345
  database: 0
  shiro:
+  database: 0
   maxIdle: 10
   maxTotal: 10
   maxWaitMillis: 1000
@@ -54,3 +59,5 @@ redis:
   timeBetweenEvictionRunsMillis: 30000
   numTestsPerEvictionRun: 10
   minEvictableIdleTimeMillis: 60000
+user:
+ servers: http://localhost:8080/auth/

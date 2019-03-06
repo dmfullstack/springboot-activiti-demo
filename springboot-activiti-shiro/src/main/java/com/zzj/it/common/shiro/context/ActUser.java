@@ -1,9 +1,10 @@
-package com.zzj.it.moudels.user.entity;
+package com.zzj.it.common.shiro.context;
 
 import java.io.Serializable;
 
 public class ActUser implements Serializable{
-    /**
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
